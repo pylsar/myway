@@ -83,21 +83,6 @@ export default{
                 }
             }
 
-            .right{
-                gap: 32px;
-                color: #fff;
-                align-items: center;
-                flex-direction: column;
-                @media (min-width: 800px){
-                    align-items: flex-end;
-                    gap: 0;
-                }
-
-                p{
-                    margin-top: auto;
-                }
-            }
-
             .header{
                 font-size: 24px;
                 color: #fff;
@@ -160,8 +145,21 @@ export default{
                         font-weight: 500;
                         color: #fff;
                         text-decoration: none;
-                        // 47-58
                     }
+                }
+            }
+            .right{
+                gap: 32px;
+                color: #fff;
+                align-items: center;
+                flex-direction: column;
+                @media (min-width: 800px){
+                    align-items: flex-end;
+                    gap: 0;
+                }
+
+                p{
+                    margin-top: auto;
                 }
             }
         }
