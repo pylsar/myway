@@ -1,5 +1,5 @@
 <template>
-    <div class="blog-wrapper">
+    <div class="blog-wrapper no-user">
         <div class="blog-content">
             <div class="blog-content-box">
                 <!-- TODO: переписать условие по дивам -->
@@ -10,7 +10,7 @@
                 <router-link v-if="post.welcomeScreen" to="#" class="link link-light">
                     Login/Register 
                 </router-link>
-                <router-link to="#" class="link link-light">
+                <router-link v-else to="#" class="link">
                     View Post 
                 </router-link>
             </div>
@@ -81,9 +81,72 @@ export default{
             p{
                 font-size: 15px;
                 font-weight: 300;
+                line-height: 1.7;
+            }
+
+            .content-preview{
+                width: 250px;
+                font-size: 13px;
+                max-height: 24px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .link{
+                display: inline-flex;
+                align-items: center;
+                margin-top: 32px;
+                padding-bottom: 4px;
+                border-bottom: 1px solid transparent;
+                transition: all .5s ease-in-out;
+                &:hover{
+                    border-bottom-color: #303030;
+                }
+            }
+
+            .link-light{
+                &:hover{
+                    border-bottom-color: #ffffff; 
+                }
             }
         }
     }
+
+
+    .blog-photo{
+        order: 1;
+        flex: 3;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0, .1), 0 2px 4px -1px rgba(0,0,0, .06);
+        @media(min-width: 700px){
+            order: 2;
+        }
+        @media(min-width: 800px){
+            flex: 4;
+        }
+
+        img{
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &:nth-child(even){
+        .blog-content{
+            order: 2;
+        }
+
+        .blog-photo{
+            order: 1;
+        }
+    }
+}
+
+.no-user:first-child{
+    background-color: #303030;
+    color: #fff;
 }
 
 </style>
