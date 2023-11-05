@@ -17,8 +17,8 @@
         <menuIcon @click="toggleMobileNav" v-show="mobile" class="menu-icon"/>
         <transition name="mobile-nav">
             <ul v-show="mobileNav" class="mobile-nav">
-                <router-link class="link" to="#">Home</router-link>
-                <router-link class="link" to="#">Blog</router-link>
+                <router-link class="link" to="/">Home</router-link>
+                <router-link class="link" to="/blogs">Blog</router-link>
                 <router-link class="link" to="#">Create Post</router-link>
                 <router-link class="link" to="#">Login/Register</router-link>
             </ul>

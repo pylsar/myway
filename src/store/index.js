@@ -5,8 +5,36 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    sampleBlogCards:[
+      {
+        blogTitle: 'blog Card 1',
+        blogCoverPhoto: 'stock-1',
+        blogDate: 'Oct 1, 2023'
+      },
+      {
+        blogTitle: 'blog Card 2',
+        blogCoverPhoto: 'stock-2',
+        blogDate: 'Oct 1, 2023'
+      },
+      {
+        blogTitle: 'blog Card 3',
+        blogCoverPhoto: 'stock-3',
+        blogDate: 'Oct 1, 2023'
+      },
+      {
+        blogTitle: 'blog Card 4',
+        blogCoverPhoto: 'stock-4',
+        blogDate: 'Oct 1, 2023'
+      }
+    ],
+    editPost: null,
   },
   mutations: {
+    toggleEditPost(state, payload){
+      state.editPost = payload;
+      console.log(state.editPost)
+
+    }
   },
   actions: {
   },
