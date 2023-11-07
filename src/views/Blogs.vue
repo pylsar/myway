@@ -29,7 +29,13 @@ export default {
                 this.$store.commit("toggleEditPost", payload);
             }
         }
-    }
+    },
+    beforeDestroy(){
+        //как только покидаем страницу с тогглом(для возможности изменять карточки)
+        //выкключаем возможность изменять(на случай если это компонент вызывается еще гдето)
+        // в данном случае на старнице blogs и главной
+        this.$store.commit("toggleEditPost", false);
+    },
 }
 </script>
 
