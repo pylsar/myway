@@ -131,7 +131,7 @@ export default {
         transform: rotateZ(3deg);
         width: 60px;
         right: -30px;
-        height: 101%;
+        height: 100vh;
         @media(min-width: 900px){
           display: initial;
         }
