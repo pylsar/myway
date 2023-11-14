@@ -124,6 +124,12 @@ button, .router-button{
   background-color: rgba(128,128,128,.5)!important;
 }
 
+.error{
+  text-align: center;
+  color: red;
+  font-size: 12px;
+}
+
 .blog-card-wrap{
   position: relative;
   padding: 80px 16px;
