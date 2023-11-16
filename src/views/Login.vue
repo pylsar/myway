@@ -15,9 +15,10 @@
           <input type="password" placeholder="Password" v-model="password" />
           <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock-alt" class="svg-inline--fa fa-lock-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zM264 392c0 22.1-17.9 40-40 40s-40-17.9-40-40v-48c0-22.1 17.9-40 40-40s40 17.9 40 40v48zm32-168H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"></path></svg>
         </div>
+        <div class="error" v-show="error">{{ this.errorMsg }}</div>
       </div>
       <router-link class="forgot-password" :to="{name: 'ForgotPassword'}">Forgot your Password?</router-link>
-      <button>Sing In</button>
+      <button @click.prevent="signIn">Sing In</button>
       <div class="angle"></div>
     </form>
     <div class="background"></div>
@@ -25,14 +26,34 @@
 </template>
 
 <script>
+import firebase from 'firebase/app';
+import 'firebase/auth';
 export default {
   name:'Login',
   data(){
     return{
-      password: null,
-      email: null,
+      password: '',
+      email: '',
+      error: null,
+      errorMsg: '',
     }
-  }
+  },
+  methods:{
+    signIn(){
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      .then(() =>{
+        this.$router.push({name: 'Home'});
+        this.error = false;
+        this.errorMsg = '';
+        console.log(firebase.auth().currentUser.uid);
+      })
+      .catch(err => {
+        this.error = true;
+        this.errorMsg = err.message;
+        console.log(err)
+      })
+    }
+  },
 }
 </script>
 
