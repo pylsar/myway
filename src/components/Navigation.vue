@@ -11,6 +11,26 @@
                     <router-link class="link" to="#">Create Post</router-link>
                     <router-link class="link" :to="{name: 'Login'}">Login/Register</router-link>
                 </ul>
+                <div class="profile" ref="profile">
+                    <span>{{ this.$store.state.profileInitials }}</span>
+                    <div class="profile-menu">
+                        <div class="info">
+                            <p class="initials">{{ this.$store.state.profileInitials }}</p>
+                            <div class="right">
+                                <p>{{ this.$store.state.profileFirstName }} {{ this.$store.state.profileLastName }}</p>
+                                <p>{{ this.$store.state.profileUserName }}</p>
+                                <p>{{ this.$store.state.profileEmail }}</p>
+                            </div>
+                        </div>
+                        <div class="options">
+                            <div class="option">
+                                <router-link class="option" to="#">Profile</router-link> 
+                                <router-link class="option" to="#">Admin</router-link> 
+                                <router-link class="option" to="#">Sign Out</router-link> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </nav>

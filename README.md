@@ -1,5 +1,5 @@
 # fireblogs
-3 25
+3 30
 ## Project setup
 ```
 npm install
