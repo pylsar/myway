@@ -47,6 +47,11 @@ export default{
         twitter,
         instagram,
         linkedIn
+    },
+    computed: {
+        user(){
+            return this.$store.state.user;
+        }
     }
 
 }

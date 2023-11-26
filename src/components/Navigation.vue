@@ -8,12 +8,12 @@
                 <ul v-show="!mobile">
                     <router-link class="link" :to="{name: 'Home'}">Home</router-link>
                     <router-link class="link" :to="{name: 'Blogs'}">Blog</router-link>
-                    <router-link class="link" to="#">Create Post</router-link>
-                    <router-link class="link" :to="{name: 'Login'}">Login/Register</router-link>
+                    <router-link v-if="user" class="link" to="#">Create Post</router-link>
+                    <router-link v-if="!user" class="link" :to="{name: 'Login'}">Login/Register</router-link>
                 </ul>
-                <div class="profile" ref="profile">
+                <div v-if="user" @click="toggleProfileMenu" class="profile" ref="profile">
                     <span>{{ this.$store.state.profileInitials }}</span>
-                    <div class="profile-menu">
+                    <div v-show="profileMenu" class="profile-menu">
                         <div class="info">
                             <p class="initials">{{ this.$store.state.profileInitials }}</p>
                             <div class="right">
@@ -24,18 +24,22 @@
                         </div>
                         <div class="options">
                             <div class="option-box">
-                                <router-link class="option" to="#">
-                                    <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="user-alt" class="svg-inline--fa fa-user-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 32c61.8 0 112 50.2 112 112s-50.2 112-112 112-112-50.2-112-112S194.2 32 256 32m128 320c52.9 0 96 43.1 96 96v32H32v-32c0-52.9 43.1-96 96-96 85 0 67.3 16 128 16 60.9 0 42.9-16 128-16M256 0c-79.5 0-144 64.5-144 144s64.5 144 144 144 144-64.5 144-144S335.5 0 256 0zm128 320c-92.4 0-71 16-128 16-56.8 0-35.7-16-128-16C57.3 320 0 377.3 0 448v32c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32v-32c0-70.7-57.3-128-128-128z"></path></svg>
-                                    <p>Profile</p>
-                                </router-link> 
-                                <router-link class="option" to="#">
-                                    <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="user-crown" class="svg-inline--fa fa-user-crown fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M313.6 320c-28.71 0-42.6 16-89.6 16-47.09 0-60.82-16-89.6-16C60.17 320 0 380.17 0 454.4v9.6c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48v-9.6c0-74.23-60.17-134.4-134.4-134.4zM416 464c0 8.82-7.18 16-16 16H48c-8.82 0-16-7.18-16-16v-9.6C32 397.94 77.94 352 134.4 352c19.38 0 39.33 16 89.6 16 49.4 0 70.66-16 89.6-16 56.46 0 102.4 45.94 102.4 102.4v9.6zM224 288c70.7 0 128-57.31 128-128V0l-64 32-64-32-64 32L96 0v160c0 70.69 57.31 128 128 128zM128 51.78l32 16 64-32 64 32 32-16V112H128V51.78zm0 92.22h192v16c0 52.93-43.06 96-96 96s-96-43.07-96-96v-16z"></path></svg>
-                                    <p>Admin</p>
-                                </router-link> 
-                                <router-link class="option" to="#">
+                                <div class="option">
+                                    <router-link class="option" to="#">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="user-alt" class="svg-inline--fa fa-user-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 32c61.8 0 112 50.2 112 112s-50.2 112-112 112-112-50.2-112-112S194.2 32 256 32m128 320c52.9 0 96 43.1 96 96v32H32v-32c0-52.9 43.1-96 96-96 85 0 67.3 16 128 16 60.9 0 42.9-16 128-16M256 0c-79.5 0-144 64.5-144 144s64.5 144 144 144 144-64.5 144-144S335.5 0 256 0zm128 320c-92.4 0-71 16-128 16-56.8 0-35.7-16-128-16C57.3 320 0 377.3 0 448v32c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32v-32c0-70.7-57.3-128-128-128z"></path></svg>
+                                        <p>Profile</p>
+                                    </router-link> 
+                                </div>
+                                <div class="option">
+                                    <router-link class="option" to="#">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="user-crown" class="svg-inline--fa fa-user-crown fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M313.6 320c-28.71 0-42.6 16-89.6 16-47.09 0-60.82-16-89.6-16C60.17 320 0 380.17 0 454.4v9.6c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48v-9.6c0-74.23-60.17-134.4-134.4-134.4zM416 464c0 8.82-7.18 16-16 16H48c-8.82 0-16-7.18-16-16v-9.6C32 397.94 77.94 352 134.4 352c19.38 0 39.33 16 89.6 16 49.4 0 70.66-16 89.6-16 56.46 0 102.4 45.94 102.4 102.4v9.6zM224 288c70.7 0 128-57.31 128-128V0l-64 32-64-32-64 32L96 0v160c0 70.69 57.31 128 128 128zM128 51.78l32 16 64-32 64 32 32-16V112H128V51.78zm0 92.22h192v16c0 52.93-43.06 96-96 96s-96-43.07-96-96v-16z"></path></svg>
+                                        <p>Admin</p>
+                                    </router-link> 
+                                </div>
+                                <div @click="signOut" class="option">
                                     <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="sign-out-alt" class="svg-inline--fa fa-sign-out-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M272 112v51.6h-96c-26.5 0-48 21.5-48 48v88.6c0 26.5 21.5 48 48 48h96v51.6c0 42.6 51.7 64.2 81.9 33.9l144-143.9c18.7-18.7 18.7-49.1 0-67.9l-144-144C323.8 48 272 69.3 272 112zm192 144L320 400v-99.7H176v-88.6h144V112l144 144zM96 64h84c6.6 0 12 5.4 12 12v24c0 6.6-5.4 12-12 12H96c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h84c6.6 0 12 5.4 12 12v24c0 6.6-5.4 12-12 12H96c-53 0-96-43-96-96V160c0-53 43-96 96-96z"></path></svg>
                                     <p>Sign Out</p>
-                                </router-link> 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -48,8 +52,8 @@
             <ul v-show="mobileNav" class="mobile-nav">
                 <router-link class="link" :to="{name: 'Home'}">Home</router-link>
                 <router-link class="link" :to="{name: 'Blogs'}">Blog</router-link>
-                <router-link class="link" to="#">Create Post</router-link>
-                <router-link class="link" :to="{name: 'Login'}">Login/Register</router-link>
+                <router-link v-if="user" class="link" to="#">Create Post</router-link>
+                <router-link v-if="!user" class="link" :to="{name: 'Login'}">Login/Register</router-link>
             </ul>
         </transition>  
     </header>
@@ -57,6 +61,9 @@
 
 <script>
 import menuIcon from '../assets/Icons/bars-regular.svg';
+
+import firebase from 'firebase/app';
+import 'firebase/auth';
     export default {
         name: 'navigation',
         components: {
@@ -64,6 +71,7 @@ import menuIcon from '../assets/Icons/bars-regular.svg';
         },
         data(){
             return {
+                profileMenu: null,
                 mobile: null,
                 mobileNav: null,
                 windowWidth: null
@@ -86,6 +94,21 @@ import menuIcon from '../assets/Icons/bars-regular.svg';
             },
             toggleMobileNav(){
                 this.mobileNav = !this.mobileNav;
+            },
+            toggleProfileMenu(e){
+                //клик по меню и его дочерним элементам
+                if(e.target === this.$refs.profile){
+                    this.profileMenu = !this.profileMenu;
+                }
+            },
+            signOut(){
+                firebase.auth().signOut();
+                window.location.reload();
+            }
+        },
+        computed: {
+            user(){
+                return this.$store.state.user;
             }
         }
     }
@@ -156,6 +179,10 @@ import menuIcon from '../assets/Icons/bars-regular.svg';
                 color: #fff;
                 background-color: #303030;
 
+                span{
+                    pointer-events: none;
+                }
+
                 .profile-menu{
                     position: absolute;
                     top: 60px;
@@ -210,6 +237,9 @@ import menuIcon from '../assets/Icons/bars-regular.svg';
                                 align-items: center;
                                 margin-bottom: 12px;
                                 width: fit-content;
+                                &:last-child{
+                                    margin-bottom: 0;
+                                }
                             }
 
                             svg{
