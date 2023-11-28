@@ -25,7 +25,7 @@
                 <label for="email">email:</label>
                 <input disabled type="text" id="email" v-model="email" />
             </div>
-            <button>Save changes</button>
+            <button @click="updateProfile">Save changes</button>
         </div>
     </div>
   </div>
@@ -37,6 +37,50 @@ export default {
     name: 'Profile',
     components: {
         Modal
+    },
+    data(){
+        return{
+            modalMessage: 'changes were saved',
+            modalActive: null,
+        }
+    },
+    methods:{
+        closeModal(){
+            this.modalActive = !this.modalActive;
+        },
+        updateProfile(){
+            this.$store.dispatch('updateuserSettings');
+            this.modalActive = !this.modalActive;
+        }
+    },
+    computed:{
+        firstName:{
+            get() {
+                return this.$store.state.profileFirstName;
+            },
+            set(payload) {
+                this.$store.commit('changeFirstName', payload);
+            },
+        },
+        lastName:{
+            get(){
+                return this.$store.state.profileLastName;
+            },
+            set(payload){
+                this.$store.commit('changelastName', payload);
+            },
+        },
+        userName:{
+            get(){
+                return this.$store.state.profileUserName;
+            },
+            set(payload){
+                this.$store.commit('changeUserName', payload);
+            },
+        },
+        email(){
+            return this.$store.state.profileEmail;
+        }
     }
 }
 </script>
@@ -44,7 +88,7 @@ export default {
 <style lang="scss" scoped>
     .profile{
         .container{
-            max-width: 100px;
+            max-width: 1000px;
             padding: 50px 25px;
 
             h2{
