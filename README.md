@@ -1,5 +1,7 @@
 # fireblogs
-4 5
+4 7
+not finished
+https://www.youtube.com/watch?v=ISv22NNL-aE&list=PLxFxQn4QsPmfGEnLh_9jQ1q9lRSq61U-C&index=30&t=1149s
 ## Project setup
 ```
 npm install
